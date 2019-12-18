@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Binary_Tree
 {
-    class Dictionary<K, V>
+    class MyDictionary<K, V>
     {
         private Node root;
-        public Dictionary()
+        public MyDictionary()
         {
             root = null;
         }
