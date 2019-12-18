@@ -4,13 +4,36 @@ using System.Text;
 
 namespace Binary_Tree
 {
-    class MyDictionary<K, V>
+    class MyDictionary<K, V> where K : IComparable where V : IComparable
     {
         private Node root;
         public MyDictionary()
         {
             root = null;
         }
+        public int count
+        {
+            get
+            {
+                if(root!= null)
+                {
+                    return Count(root);
+                }
+                return 0;
+            }
+        }
+        public int depth
+        {
+            get
+            {
+                if (root != null)
+                {
+                    return Depth(root);
+                }
+                return -1;
+            }
+        }
+
         internal class Node
         {
             public K key;
@@ -44,7 +67,7 @@ namespace Binary_Tree
             {
                 throw new System.ArgumentException("Position is larger than number of items");
             }
-            if (root.key.ToString().CompareTo(newroute.ToString()) > 0) //Root Key 
+            if (root.key.CompareTo(newroute.key) > 0)                   //left
             {
                 if (root.left == null)
                 {
@@ -55,7 +78,7 @@ namespace Binary_Tree
                     Insert(root.left, newnode);
                 }
             }
-            else                                                        //Root Key > Key
+            else                                                        //right
             {
                 if (root.right == null)
                 {
@@ -69,7 +92,13 @@ namespace Binary_Tree
         }
         public override string ToString()
         {
-            return ToString2(root);
+            string temp = "";
+            if (root != null)
+            {
+                temp = ToString2(root);
+            }
+            return temp;
+            
         }
         private string ToString2(Node temp)
         {
@@ -84,6 +113,50 @@ namespace Binary_Tree
                 result += ToString2(temp.right) + " ";
             }
             return result;
+        }
+        private int Count(Node temp)
+        {
+            int count = 1;
+            if (temp.left != null)
+            {
+                count += Count(temp.left);
+
+            }
+            
+            if (temp.right != null)
+            {
+                count += Count(temp.right);
+
+            }
+            return count;
+        }
+        public V Min(Node temp)
+        {
+            V min = temp.left.value;
+            while(temp.left != null)
+            {
+                min = temp.left.value;
+
+            }
+            return min;
+        }
+        public V Max(Node temp)
+        {
+            V max =temp.right.value;
+            while (temp.right != null)
+            {
+                max = temp.right.value;
+
+            }
+            return max;
+        }
+        public int Depth(Node temp)
+        {
+
+        }
+        public void Delete(V value)
+        {
+            //https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
         }
     }
 }

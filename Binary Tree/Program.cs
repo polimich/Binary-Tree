@@ -6,7 +6,7 @@ namespace Binary_Tree
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
